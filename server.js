@@ -4,10 +4,18 @@ const app = express();
 app.use(express.json());
 const dotenv = require('dotenv');
 dotenv.config();
-
+const fs = require('fs')
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 const itemsPool = require('./DBConfig');
+
+//npm install swagger-ui-express swagger-jsdoc --save
+// import library and files
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+const customCss = fs.readFileSync((process.cwd()+"/swagger.css"), 'utf8');
+// let express to use this
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
 
 app.get('/users', async(req, res) => {
     try {
