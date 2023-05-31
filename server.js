@@ -15,7 +15,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const customCss = fs.readFileSync((process.cwd()+"/swagger.css"), 'utf8');
 // let express to use this
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
+app.use('', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
 
 app.get('/users', async(req, res) => {
     try {
